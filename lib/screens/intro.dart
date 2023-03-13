@@ -4,7 +4,6 @@ import 'package:bigul/screens/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../utils/input_validators.dart';
@@ -21,23 +20,28 @@ class _IntroState extends State<Intro> {
   final _formKey = GlobalKey<FormState>();
 
   void handleOtpLogin() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: ((context) => const Center(
-              child: CircularProgressIndicator(color: AppConstants.blueColor),
-            )));
-    String phone = phoneController.text;
-    if (!(_formKey.currentState!.validate())) {
-      Get.snackbar("Error", 'Invalid Phone Number',
-          snackPosition: SnackPosition.BOTTOM,
-          colorText: AppConstants.blueColor);
-      Future.delayed(
-          const Duration(seconds: 2), (() => _formKey.currentState!.reset()));
-      Navigator.pop(context);
-      return;
-    }
-    Navigator.pop(context);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: ((context) =>
+                OTP(mobileNumber: phoneController.text.trim()))));
+    // showDialog(
+    //     context: context,
+    //     barrierDismissible: false,
+    //     builder: ((context) => const Center(
+    //           child: CircularProgressIndicator(color: AppConstants.blueColor),
+    //         )));
+    // String phone = phoneController.text.trim();
+    // if (!(_formKey.currentState!.validate())) {
+    //   Get.snackbar("Error", 'Invalid Phone Number',
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       colorText: AppConstants.blueColor);
+    //   Future.delayed(
+    //       const Duration(seconds: 2), (() => _formKey.currentState!.reset()));
+    //   Navigator.pop(context);
+    //   return;
+    // }
+    // Navigator.pop(context);
   }
 
   @override
@@ -138,7 +142,7 @@ class _IntroState extends State<Intro> {
                         ),
                         InkWell(
                           onTap: () => phoneController.text.isEmpty
-                              ? Get.to(const OTP())
+                              ? null
                               : handleOtpLogin(),
                           child: Container(
                             width: SizeConfig.screenWidth! * 0.25,

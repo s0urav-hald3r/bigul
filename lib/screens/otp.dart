@@ -1,17 +1,21 @@
 import 'dart:async';
 
+import 'package:bigul/screens/mobile_verified.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../config/app_constants.dart';
 import '../config/size_configs.dart';
+import '../controllers/countdown_timer.dart';
 
 class OTP extends StatefulWidget {
-  const OTP({Key? key}) : super(key: key);
+  const OTP({Key? key, required this.mobileNumber}) : super(key: key);
+  final String mobileNumber;
 
   @override
   State<OTP> createState() => _OTPState();
@@ -22,14 +26,44 @@ class _OTPState extends State<OTP> {
   TextEditingController otpController = TextEditingController();
   StreamController<ErrorAnimationType> errorController =
       StreamController<ErrorAnimationType>();
+  final otpCountDownTimer = Get.put(OtpCountDownTimer());
+  bool isOTPfilled = false;
 
-  void handleOtpLogin() {
+  @override
+  void initState() {
+    otpCountDownTimer.startTimer();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    otpCountDownTimer.stopTimer();
+    super.dispose();
+  }
+
+  void otpLogin() {
     String otp = otpController.text;
     if (otp.length != 6) {
       errorController.add(ErrorAnimationType.shake);
       return;
     }
+    doLogin();
   }
+
+  doLogin() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) => const Dialog(
+              backgroundColor: Colors.white,
+              insetPadding: EdgeInsets.zero,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: MobileVerified(),
+            ));
+  }
+
+  void resendOtp() {}
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +120,7 @@ class _OTPState extends State<OTP> {
                   ),
                   const Gap(2.5),
                   Text(
-                    '+91 8609640499',
+                    '+91 ${widget.mobileNumber}',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                         color: AppConstants.blackColor,
@@ -145,46 +179,60 @@ class _OTPState extends State<OTP> {
                       debugPrint("Completed: $v");
                     },
                     onChanged: (value) {
+                      if (value.length == 6) {
+                        setState(() {
+                          isOTPfilled = true;
+                        });
+                      }
                       debugPrint('OnChanged: $value');
-                    },
-                    beforeTextPaste: (text) {
-                      debugPrint("Allowing to paste $text");
-                      return true;
                     },
                   ),
                   const Gap(20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '00:00',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                            color: AppConstants.greyColor,
-                            fontSize: SizeConfig.screenWidth! * 0.035,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      const Gap(20),
-                      Text(
-                        'Resend OTP',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                            decoration: TextDecoration.underline,
-                            color: AppConstants.blueColor,
-                            fontSize: SizeConfig.screenWidth! * 0.035,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    ],
-                  ),
+                  Obx(() => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            '${formatter.format(otpCountDownTimer.minute)} : ${formatter.format(otpCountDownTimer.second)}',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                color: AppConstants.greyColor,
+                                fontSize: SizeConfig.screenWidth! * 0.035,
+                                fontWeight: FontWeight.w400),
+                          ),
+                          const Gap(10),
+                          InkWell(
+                            onTap: () {
+                              if (otpCountDownTimer.isTimerStop) {
+                                otpCountDownTimer.startTimer();
+                                resendOtp();
+                              } else {
+                                null;
+                              }
+                            },
+                            child: Text(
+                              'Resend OTP',
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.poppins(
+                                  decoration: TextDecoration.underline,
+                                  color: otpCountDownTimer.isTimerStop
+                                      ? AppConstants.blueColor
+                                      : AppConstants.greyColor,
+                                  fontSize: SizeConfig.screenWidth! * 0.035,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ],
+                      )),
                   const Spacer(),
                   InkWell(
-                    onTap: () =>
-                        otpController.text.isEmpty ? null : handleOtpLogin(),
+                    onTap: () => otpController.text.isEmpty ? null : otpLogin(),
                     child: Container(
                       width: SizeConfig.screenWidth,
                       height: SizeConfig.screenHeight! * 0.065,
                       decoration: BoxDecoration(
-                          color: AppConstants.blueColor,
+                          color: isOTPfilled
+                              ? AppConstants.blueColor
+                              : AppConstants.greyColor,
                           borderRadius: BorderRadius.circular(50)),
                       child: Center(
                         child: Text(
