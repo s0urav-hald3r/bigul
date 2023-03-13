@@ -1,5 +1,6 @@
 import 'package:bigul/config/app_constants.dart';
 import 'package:bigul/config/size_configs.dart';
+import 'package:bigul/screens/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gap/gap.dart';
@@ -18,18 +19,6 @@ class Intro extends StatefulWidget {
 class _IntroState extends State<Intro> {
   TextEditingController phoneController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  @override
-  void initState() {
-    phoneController = TextEditingController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    phoneController.dispose();
-    super.dispose();
-  }
 
   void handleOtpLogin() {
     showDialog(
@@ -148,7 +137,9 @@ class _IntroState extends State<Intro> {
                           ),
                         ),
                         InkWell(
-                          onTap: () => handleOtpLogin(),
+                          onTap: () => phoneController.text.isEmpty
+                              ? Get.to(const OTP())
+                              : handleOtpLogin(),
                           child: Container(
                             width: SizeConfig.screenWidth! * 0.25,
                             height: SizeConfig.screenHeight! * 0.065,
