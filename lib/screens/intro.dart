@@ -1,5 +1,7 @@
 import 'package:bigul/config/app_constants.dart';
 import 'package:bigul/config/size_configs.dart';
+import 'package:bigul/screens/digilocker_1_1.dart';
+import 'package:bigul/screens/doc_fetch.dart';
 import 'package:bigul/screens/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -195,33 +197,39 @@ class _IntroState extends State<Intro> {
                       ],
                     ),
                   ),
-                  Container(
-                    width: SizeConfig.screenWidth,
-                    height: SizeConfig.screenHeight! * 0.065,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.shade300,
-                            blurRadius: 5.0,
+                  InkWell(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => const DigiLocker11()))),
+                    child: Container(
+                      width: SizeConfig.screenWidth,
+                      height: SizeConfig.screenHeight! * 0.065,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.shade300,
+                              blurRadius: 5.0,
+                            ),
+                          ],
+                          border: Border.all(color: Colors.white),
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.asset('assets/images/google_logo.png'),
+                          const Gap(20),
+                          Text(
+                            'Sign in with Google',
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.roboto(
+                                color: AppConstants.greyColor,
+                                fontSize: SizeConfig.screenWidth! * 0.04,
+                                fontWeight: FontWeight.w500),
                           ),
                         ],
-                        border: Border.all(color: Colors.white),
-                        borderRadius: BorderRadius.circular(50)),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset('assets/images/google_logo.png'),
-                        const Gap(20),
-                        Text(
-                          'Sign in with Google',
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.roboto(
-                              color: AppConstants.greyColor,
-                              fontSize: SizeConfig.screenWidth! * 0.04,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
                 ],

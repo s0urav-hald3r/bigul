@@ -50,7 +50,7 @@ class _OTPState extends State<OTP> {
     doLogin();
   }
 
-  doLogin() {
+  void doLogin() {
     showDialog(
         context: context,
         barrierDismissible: false,

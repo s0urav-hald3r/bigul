@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../config/app_constants.dart';
 import '../config/size_configs.dart';
 
-class MobileVerified extends StatelessWidget {
-  const MobileVerified({Key? key}) : super(key: key);
+class EmailVerified extends StatelessWidget {
+  const EmailVerified({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class MobileVerified extends StatelessWidget {
             children: [
               const Spacer(flex: 4),
               Text(
-                'Mobile Number Verified',
+                'Email Link Sent',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.poppins(
                     color: AppConstants.blackColor,
@@ -41,7 +41,7 @@ class MobileVerified extends StatelessWidget {
             ],
           ),
           Image.asset(
-            'assets/images/mobile_verified.png',
+            'assets/images/email_verified.png',
             fit: BoxFit.contain,
             width: SizeConfig.screenWidth! * 0.484,
           ),
