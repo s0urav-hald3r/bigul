@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:im_stepper/stepper.dart';
 
 import '../config/app_constants.dart';
 import '../config/size_configs.dart';
@@ -38,18 +39,46 @@ class DigiLocker11 extends StatelessWidget {
                             children: [
                               Image.asset('assets/images/logo.png'),
                               const Spacer(flex: 3),
-                              Text(
-                                'You are on Step 2 of 8',
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.poppins(
-                                    color: AppConstants.greyColor,
-                                    fontSize: SizeConfig.screenWidth! * 0.04,
-                                    fontWeight: FontWeight.w500),
+                              Column(
+                                children: [
+                                  Text(
+                                    'You are on Step 2 of 8',
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.poppins(
+                                        color: AppConstants.greyColor,
+                                        fontSize:
+                                            SizeConfig.screenWidth! * 0.04,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  DotStepper(
+                                    // direction: Axis.vertical,
+                                    dotCount: 8,
+                                    dotRadius: 6,
+
+                                    /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
+                                    activeStep: 1,
+                                    shape: Shape.stadium,
+                                    spacing: 10,
+                                    indicator: Indicator.slide,
+
+                                    /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
+                                    onDotTapped: (tappedDotIndex) {},
+                                    // DOT-STEPPER DECORATIONS
+                                    fixedDotDecoration:
+                                        const FixedDotDecoration(
+                                            color: AppConstants.greyColor),
+                                    indicatorDecoration:
+                                        const IndicatorDecoration(
+                                            color: AppConstants.blueColor),
+                                    lineConnectorDecoration:
+                                        const LineConnectorDecoration(),
+                                  ),
+                                ],
                               ),
                               const Spacer(flex: 4)
                             ],
                           ),
-                          const Gap(20),
+                          const Gap(30),
                           Image.asset('assets/images/locker_screen_logo.png'),
                           const Gap(20),
                           Text(
