@@ -15,4 +15,6 @@ class AppConstants {
   static const verifyOtp = "verify-otp";
 
   static const sendVerificationEmail = "send-verification-email";
+
+  static const digilockerData = "digilocker-data";
 }

@@ -1,4 +1,4 @@
-import 'package:bigul/screens/intro.dart';
+import 'package:bigul/screens/digilocker_1_1.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -35,7 +35,7 @@ class MobileVerified extends StatelessWidget {
               InkWell(
                 onTap: () => Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (context) => const Intro()),
+                    MaterialPageRoute(builder: (context) => DigiLocker11()),
                     (route) => false),
                 child: const Icon(
                   Icons.close,
