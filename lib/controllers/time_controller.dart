@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:get/state_manager.dart';
 
-class OtpCountDownTimer extends GetxController {
+class TimeController extends GetxController {
   RxInt min = 00.obs;
   RxInt sec = 29.obs;
 

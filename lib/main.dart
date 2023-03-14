@@ -2,8 +2,10 @@ import 'package:bigul/screens/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:bigul/utils/init_app.dart' as app;
 
-void main() {
+void main() async {
+  await app.initApp();
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

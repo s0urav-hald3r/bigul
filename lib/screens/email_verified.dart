@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../config/app_constants.dart';
 import '../config/size_configs.dart';
+import 'intro.dart';
 
 class EmailVerified extends StatelessWidget {
   const EmailVerified({Key? key}) : super(key: key);
@@ -32,7 +33,10 @@ class EmailVerified extends StatelessWidget {
               ),
               const Spacer(flex: 3),
               InkWell(
-                onTap: () => Navigator.pop(context),
+                onTap: () => Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Intro()),
+                    (route) => false),
                 child: const Icon(
                   Icons.close,
                   color: AppConstants.greyColor,
