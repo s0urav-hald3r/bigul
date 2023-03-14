@@ -147,14 +147,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-  im_stepper:
-    dependency: "direct main"
-    description:
-      name: im_stepper
-      sha256: "84ca411f7c4666cb8762a6dd6eec0353c96c67f674124614263875d0570ca634"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.1+1"
   intl:
     dependency: "direct main"
     description:
@@ -320,6 +312,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: "direct main"
+    description:
+      name: smooth_page_indicator
+      sha256: "8c301bc686892306cd41672c1880167f140c16be305d5ede8201fefd9fcda829"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   source_span:
     dependency: transitive
     description:

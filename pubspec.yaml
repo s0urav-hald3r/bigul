@@ -41,7 +41,7 @@ dependencies:
   pin_code_fields: ^7.3.0
   intl: ^0.17.0
   flutter_svg: ^1.0.3
-  im_stepper: ^1.0.1+1
+  smooth_page_indicator: ^1.0.1
 
 dev_dependencies:
   flutter_test:
