@@ -139,7 +139,7 @@ class DigiLocker11 extends StatelessWidget {
                           ),
                           const Gap(20),
                           InkWell(
-                            onTap: () => Navigator.pop(context),
+                            onTap: () => Navigator.maybePop(context),
                             child: Text(
                               'Back',
                               style: GoogleFonts.poppins(

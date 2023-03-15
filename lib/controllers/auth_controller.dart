@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:bigul/screens/digilocker_1_1.dart';
 import 'package:bigul/screens/email_verified.dart';
 import 'package:bigul/screens/otp.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,12 @@ class AuthController extends GetxController {
                       borderRadius: BorderRadius.all(Radius.circular(20))),
                   child: MobileVerified(),
                 ));
+        Future.delayed(
+            const Duration(seconds: 2),
+            () => Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => DigiLocker11()),
+                (route) => false));
       }
     } catch (e) {
       if (e is CustomException) {

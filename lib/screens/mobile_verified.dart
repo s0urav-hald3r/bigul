@@ -33,10 +33,7 @@ class MobileVerified extends StatelessWidget {
               ),
               const Spacer(flex: 3),
               InkWell(
-                onTap: () => Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => DigiLocker11()),
-                    (route) => false),
+                onTap: () => Navigator.pop(context),
                 child: const Icon(
                   Icons.close,
                   color: AppConstants.greyColor,
